@@ -28,6 +28,7 @@ class _MyAppState extends State<MyApp> {
         home: Scaffold(
           body: _currentPage,
           bottomNavigationBar: BottomNavigationBar(
+            currentIndex: _pageIndex,
             items: [
               BottomNavigationBarItem(
                   icon: Icon(Icons.star), title: Text('Hello World')),
