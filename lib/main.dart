@@ -1,31 +1,60 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:shop_flutter/services/product_service.dart';
 
 import 'pages/pages.dart';
 import 'providers/providers.dart';
-
 
 void main() {
   runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  @override
+  _MyAppState createState() => _MyAppState();
+}
 
+class _MyAppState extends State<MyApp> {
+  var _pageIndex = 0;
 
-  // This widget is the root of your application.
+  final _screens = [HomePage(), CartPage()];
+
+  Widget get _currentPage {
+    return _screens[_pageIndex];
+  }
+
   @override
   Widget build(BuildContext context) {
     return AppProvider(
       child: MaterialApp(
-          title: 'Flutter Demo',
-          theme: ThemeData(
-            visualDensity: VisualDensity.adaptivePlatformDensity,
+        home: Scaffold(
+          body: _currentPage,
+          bottomNavigationBar: BottomNavigationBar(
+            items: [
+              BottomNavigationBarItem(
+                  icon: Icon(Icons.star), title: Text('Hello World')),
+              BottomNavigationBarItem(
+                  icon: Icon(Icons.star), title: Text('Hello World')),
+            ].toList(),
+            onTap: (id) {
+              setState(() {
+                _pageIndex = id;
+              });
+            },
           ),
-          home: HomePage()
+        ),
+        title: 'Flutter Demo',
+        theme: ThemeData(
+          visualDensity: VisualDensity.adaptivePlatformDensity,
+        ),
       ),
     );
   }
 }
 
-
+class CartPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Text('Cart'),
+    );
+  }
+}

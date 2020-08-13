@@ -9,6 +9,9 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text('Products'),
+      ),
       body: Container(
           child: FutureBuilder(
             future: Provider.of<ProductDataService>(context).getProducts(),
@@ -26,16 +29,18 @@ class HomePage extends StatelessWidget {
   }
 
   ListView _buildProducts(BuildContext context, List products) {
-    return ListView.builder(
+    return ListView.separated(
       itemCount: products.length,
       itemBuilder: (context, index) {
 
         final product = products[index];
 
-
         return ListTile(
-            title: Text(product['title'])
+            title: Text(product['title']),
         );
+      },
+      separatorBuilder: (context, index) {
+        return Divider();
       },
     );
   }
