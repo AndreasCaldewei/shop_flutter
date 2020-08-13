@@ -12,21 +12,27 @@ class MyApp extends StatefulWidget {
   _MyAppState createState() => _MyAppState();
 }
 
-class _MyAppState extends State<MyApp> {
+
+class _MyAppState extends State<MyApp>  {
   var _pageIndex = 0;
 
   final _screens = [HomePage(), CartPage()];
 
-  Widget get _currentPage {
-    return _screens[_pageIndex];
-  }
+
+  PageController _pageController = PageController();
+
+
+
 
   @override
   Widget build(BuildContext context) {
     return AppProvider(
       child: MaterialApp(
         home: Scaffold(
-          body: _currentPage,
+          body: PageView(
+            controller: _pageController,
+            children: _screens,
+          ),
           bottomNavigationBar: BottomNavigationBar(
             currentIndex: _pageIndex,
             items: [
@@ -36,9 +42,10 @@ class _MyAppState extends State<MyApp> {
                   icon: Icon(Icons.star), title: Text('Hello World')),
             ].toList(),
             onTap: (id) {
-              setState(() {
-                _pageIndex = id;
-              });
+                setState(() {
+                  _pageIndex = id;
+                });
+                _pageController.jumpToPage(id);
             },
           ),
         ),
@@ -49,6 +56,8 @@ class _MyAppState extends State<MyApp> {
       ),
     );
   }
+
+
 }
 
 class CartPage extends StatelessWidget {
