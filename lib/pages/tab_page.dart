@@ -9,15 +9,16 @@ class TabPage extends StatefulWidget {
 }
 
 class _TabPageState extends State<TabPage> {
+
+  var _pageIndex = 0;
+  final _screens = [HomePage(), CartPage()];
+  final PageController _pageController = PageController();
+
+
   @override
   Widget build(BuildContext context) {
 
-    var _pageIndex = 0;
 
-    final _screens = [HomePage(), CartPage()];
-
-
-    PageController _pageController = PageController();
 
 
     return Scaffold(
@@ -34,9 +35,9 @@ class _TabPageState extends State<TabPage> {
         currentIndex: _pageIndex,
         items: [
           BottomNavigationBarItem(
-              icon: Icon(Icons.star), title: Text('Hello World')),
+              icon: Icon(Icons.star), title: Text('Products')),
           BottomNavigationBarItem(
-              icon: Icon(Icons.star), title: Text('Hello World')),
+              icon: Icon(Icons.shopping_cart), title: Text('Cart')),
         ].toList(),
         onTap: (id) {
           setState(() {
@@ -47,4 +48,5 @@ class _TabPageState extends State<TabPage> {
       ),
     );
   }
+
 }
