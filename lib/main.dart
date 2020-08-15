@@ -30,6 +30,11 @@ class _MyAppState extends State<MyApp>  {
       child: MaterialApp(
         home: Scaffold(
           body: PageView(
+            onPageChanged: (index) {
+              setState(() {
+                _pageIndex = index;
+              });
+            },
             controller: _pageController,
             children: _screens,
           ),
